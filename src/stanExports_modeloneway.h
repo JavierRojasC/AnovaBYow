@@ -33,7 +33,7 @@ static int current_statement_begin__;
 stan::io::program_reader prog_reader__() {
     stan::io::program_reader reader;
     reader.add_event(0, 0, "start", "model_modeloneway");
-    reader.add_event(29, 27, "end", "model_modeloneway");
+    reader.add_event(28, 26, "end", "model_modeloneway");
     return reader;
 }
 #include <stan_meta_header.hpp>
@@ -74,21 +74,21 @@ public:
         (void) DUMMY_VAR__;  // suppress unused var warning
         try {
             // initialize data block variables from context__
-            current_statement_begin__ = 3;
+            current_statement_begin__ = 2;
             context__.validate_dims("data initialization", "N", "int", context__.to_vec());
             N = int(0);
             vals_i__ = context__.vals_i("N");
             pos__ = 0;
             N = vals_i__[pos__++];
             check_greater_or_equal(function__, "N", N, 0);
-            current_statement_begin__ = 4;
+            current_statement_begin__ = 3;
             context__.validate_dims("data initialization", "J", "int", context__.to_vec());
             J = int(0);
             vals_i__ = context__.vals_i("J");
             pos__ = 0;
             J = vals_i__[pos__++];
             check_greater_or_equal(function__, "J", J, 0);
-            current_statement_begin__ = 5;
+            current_statement_begin__ = 4;
             validate_non_negative_index("predictor", "N", N);
             context__.validate_dims("data initialization", "predictor", "int", context__.to_vec(N));
             predictor = std::vector<int>(N, int(0));
@@ -103,7 +103,7 @@ public:
                 check_greater_or_equal(function__, "predictor[i_0__]", predictor[i_0__], 1);
                 check_less_or_equal(function__, "predictor[i_0__]", predictor[i_0__], J);
             }
-            current_statement_begin__ = 6;
+            current_statement_begin__ = 5;
             validate_non_negative_index("response", "N", N);
             context__.validate_dims("data initialization", "response", "vector_d", context__.to_vec(N));
             response = Eigen::Matrix<double, Eigen::Dynamic, 1>(N);
@@ -119,14 +119,14 @@ public:
             // validate, set parameter ranges
             num_params_r__ = 0U;
             param_ranges_i__.clear();
-            current_statement_begin__ = 9;
+            current_statement_begin__ = 8;
             validate_non_negative_index("eta", "J", J);
             num_params_r__ += J;
+            current_statement_begin__ = 9;
+            num_params_r__ += 1;
             current_statement_begin__ = 10;
             num_params_r__ += 1;
             current_statement_begin__ = 11;
-            num_params_r__ += 1;
-            current_statement_begin__ = 12;
             num_params_r__ += 1;
         } catch (const std::exception& e) {
             stan::lang::rethrow_located(e, current_statement_begin__, prog_reader__());
@@ -145,7 +145,7 @@ public:
         (void) pos__; // dummy call to supress warning
         std::vector<double> vals_r__;
         std::vector<int> vals_i__;
-        current_statement_begin__ = 9;
+        current_statement_begin__ = 8;
         if (!(context__.contains_r("eta")))
             stan::lang::rethrow_located(std::runtime_error(std::string("Variable eta missing")), current_statement_begin__, prog_reader__());
         vals_r__ = context__.vals_r("eta");
@@ -162,7 +162,7 @@ public:
         } catch (const std::exception& e) {
             stan::lang::rethrow_located(std::runtime_error(std::string("Error transforming variable eta: ") + e.what()), current_statement_begin__, prog_reader__());
         }
-        current_statement_begin__ = 10;
+        current_statement_begin__ = 9;
         if (!(context__.contains_r("mu")))
             stan::lang::rethrow_located(std::runtime_error(std::string("Variable mu missing")), current_statement_begin__, prog_reader__());
         vals_r__ = context__.vals_r("mu");
@@ -175,7 +175,7 @@ public:
         } catch (const std::exception& e) {
             stan::lang::rethrow_located(std::runtime_error(std::string("Error transforming variable mu: ") + e.what()), current_statement_begin__, prog_reader__());
         }
-        current_statement_begin__ = 11;
+        current_statement_begin__ = 10;
         if (!(context__.contains_r("sigmaalpha")))
             stan::lang::rethrow_located(std::runtime_error(std::string("Variable sigmaalpha missing")), current_statement_begin__, prog_reader__());
         vals_r__ = context__.vals_r("sigmaalpha");
@@ -188,7 +188,7 @@ public:
         } catch (const std::exception& e) {
             stan::lang::rethrow_located(std::runtime_error(std::string("Error transforming variable sigmaalpha: ") + e.what()), current_statement_begin__, prog_reader__());
         }
-        current_statement_begin__ = 12;
+        current_statement_begin__ = 11;
         if (!(context__.contains_r("sigmaepsilon")))
             stan::lang::rethrow_located(std::runtime_error(std::string("Variable sigmaepsilon missing")), current_statement_begin__, prog_reader__());
         vals_r__ = context__.vals_r("sigmaepsilon");
@@ -226,28 +226,28 @@ public:
         try {
             stan::io::reader<local_scalar_t__> in__(params_r__, params_i__);
             // model parameters
-            current_statement_begin__ = 9;
+            current_statement_begin__ = 8;
             Eigen::Matrix<local_scalar_t__, Eigen::Dynamic, 1> eta;
             (void) eta;  // dummy to suppress unused var warning
             if (jacobian__)
                 eta = in__.vector_constrain(J, lp__);
             else
                 eta = in__.vector_constrain(J);
-            current_statement_begin__ = 10;
+            current_statement_begin__ = 9;
             local_scalar_t__ mu;
             (void) mu;  // dummy to suppress unused var warning
             if (jacobian__)
                 mu = in__.scalar_constrain(lp__);
             else
                 mu = in__.scalar_constrain();
-            current_statement_begin__ = 11;
+            current_statement_begin__ = 10;
             local_scalar_t__ sigmaalpha;
             (void) sigmaalpha;  // dummy to suppress unused var warning
             if (jacobian__)
                 sigmaalpha = in__.scalar_lb_constrain(0, lp__);
             else
                 sigmaalpha = in__.scalar_lb_constrain(0);
-            current_statement_begin__ = 12;
+            current_statement_begin__ = 11;
             local_scalar_t__ sigmaepsilon;
             (void) sigmaepsilon;  // dummy to suppress unused var warning
             if (jacobian__)
@@ -255,22 +255,22 @@ public:
             else
                 sigmaepsilon = in__.scalar_lb_constrain(0);
             // transformed parameters
-            current_statement_begin__ = 15;
+            current_statement_begin__ = 14;
             validate_non_negative_index("a", "J", J);
             Eigen::Matrix<local_scalar_t__, Eigen::Dynamic, 1> a(J);
             stan::math::initialize(a, DUMMY_VAR__);
             stan::math::fill(a, DUMMY_VAR__);
-            current_statement_begin__ = 16;
+            current_statement_begin__ = 15;
             validate_non_negative_index("yhat", "N", N);
             Eigen::Matrix<local_scalar_t__, Eigen::Dynamic, 1> yhat(N);
             stan::math::initialize(yhat, DUMMY_VAR__);
             stan::math::fill(yhat, DUMMY_VAR__);
             // transformed parameters block statements
-            current_statement_begin__ = 18;
+            current_statement_begin__ = 17;
             stan::math::assign(a, add(mu, multiply(sigmaalpha, eta)));
-            current_statement_begin__ = 20;
+            current_statement_begin__ = 19;
             for (int i = 1; i <= N; ++i) {
-                current_statement_begin__ = 21;
+                current_statement_begin__ = 20;
                 stan::model::assign(yhat, 
                             stan::model::cons_list(stan::model::index_uni(i), stan::model::nil_index_list()), 
                             get_base1(a, get_base1(predictor, i, "predictor", 1), "a", 1), 
@@ -279,7 +279,7 @@ public:
             // validate transformed parameters
             const char* function__ = "validate transformed params";
             (void) function__;  // dummy to suppress unused var warning
-            current_statement_begin__ = 15;
+            current_statement_begin__ = 14;
             size_t a_j_1_max__ = J;
             for (size_t j_1__ = 0; j_1__ < a_j_1_max__; ++j_1__) {
                 if (stan::math::is_uninitialized(a(j_1__))) {
@@ -288,7 +288,7 @@ public:
                     stan::lang::rethrow_located(std::runtime_error(std::string("Error initializing variable a: ") + msg__.str()), current_statement_begin__, prog_reader__());
                 }
             }
-            current_statement_begin__ = 16;
+            current_statement_begin__ = 15;
             size_t yhat_j_1_max__ = N;
             for (size_t j_1__ = 0; j_1__ < yhat_j_1_max__; ++j_1__) {
                 if (stan::math::is_uninitialized(yhat(j_1__))) {
@@ -298,9 +298,9 @@ public:
                 }
             }
             // model body
-            current_statement_begin__ = 24;
+            current_statement_begin__ = 23;
             lp_accum__.add(normal_log<propto__>(eta, 0, 1));
-            current_statement_begin__ = 26;
+            current_statement_begin__ = 25;
             lp_accum__.add(normal_log<propto__>(response, yhat, sigmaepsilon));
         } catch (const std::exception& e) {
             stan::lang::rethrow_located(e, current_statement_begin__, prog_reader__());
@@ -381,22 +381,22 @@ public:
         if (!include_tparams__ && !include_gqs__) return;
         try {
             // declare and define transformed parameters
-            current_statement_begin__ = 15;
+            current_statement_begin__ = 14;
             validate_non_negative_index("a", "J", J);
             Eigen::Matrix<double, Eigen::Dynamic, 1> a(J);
             stan::math::initialize(a, DUMMY_VAR__);
             stan::math::fill(a, DUMMY_VAR__);
-            current_statement_begin__ = 16;
+            current_statement_begin__ = 15;
             validate_non_negative_index("yhat", "N", N);
             Eigen::Matrix<double, Eigen::Dynamic, 1> yhat(N);
             stan::math::initialize(yhat, DUMMY_VAR__);
             stan::math::fill(yhat, DUMMY_VAR__);
             // do transformed parameters statements
-            current_statement_begin__ = 18;
+            current_statement_begin__ = 17;
             stan::math::assign(a, add(mu, multiply(sigmaalpha, eta)));
-            current_statement_begin__ = 20;
+            current_statement_begin__ = 19;
             for (int i = 1; i <= N; ++i) {
-                current_statement_begin__ = 21;
+                current_statement_begin__ = 20;
                 stan::model::assign(yhat, 
                             stan::model::cons_list(stan::model::index_uni(i), stan::model::nil_index_list()), 
                             get_base1(a, get_base1(predictor, i, "predictor", 1), "a", 1), 

@@ -1,4 +1,3 @@
-
 data {
       int<lower=0> N;
       int<lower=0> J;
