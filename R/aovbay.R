@@ -34,8 +34,8 @@ aovbay <- function(dataset=FALSE) {
 
 
   #rt <- stanc(file='https://raw.githubusercontent.com/JavierRojasC/JavierRCam/master/oneway.stan')
-  rt <- (stanc(model_code = stanmodels$modeloneway))
-  sm <- stan_model(stanc_ret = rt, verbose=FALSE)
+ # rt <- (stanc(model_code = ))
+  sm <- stan_model(stanc_ret = stanmodels$modeloneway, verbose=FALSE)
 
   left_footer <- fluidRow(
     column(
